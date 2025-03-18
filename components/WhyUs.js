@@ -23,7 +23,7 @@ const WhyUs = () => {
           <h2 className="text-3xl font-bold mb-10 text-slate-800">
             👉 3 Easy Steps to Update Your Printer Drivers
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
             {[
               {
                 title: "Step 1",
@@ -48,10 +48,12 @@ const WhyUs = () => {
                 <img
                   src={step.img}
                   alt={step.title}
-                  className="w-full h-15 object-contain mx-auto mb-4"
+                  className="w-full h-24 object-contain mx-auto mb-4"
                 />
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p>{step.desc}</p>
+                <h3 className="text-xl font-semibold mb-2 text-slate-800">
+                  {step.title}
+                </h3>
+                <p className="text-gray-700">{step.desc}</p>
               </div>
             ))}
           </div>
