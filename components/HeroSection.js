@@ -2,11 +2,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import DownloadModal from "@/components/DownloadModal";
-import BrandModal from "@/components/BrandModal";
 
 const HeroSection = () => {
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
 
   const handleDownloadComplete = () => {
     setIsSuccessModalOpen(true);
@@ -17,10 +16,10 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Install & Update Printer Drivers with <br />
+            Install & Update Printer Drivers with
             All-in-One Printer Driver Updater
           </h1>
-          <p className="text-lg mt-4 mb-8">
+          <p className="mt-4 mb-8">
             Download, install, and automatically update printer drivers for
             every major brand. <br />
             Compatible with Windows 11, 10, 8, and 7.
@@ -73,11 +72,6 @@ const HeroSection = () => {
         isOpen={isDownloadModalOpen}
         onClose={() => setIsDownloadModalOpen(false)}
         onComplete={handleDownloadComplete}
-      />
-
-      <BrandModal
-        isOpen={isSuccessModalOpen}
-        onClose={() => setIsSuccessModalOpen(false)}
       />
     </section>
   );

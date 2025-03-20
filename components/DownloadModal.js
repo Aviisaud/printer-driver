@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-const DownloadModal = ({ isOpen, onClose, onComplete }) => {
+const DownloadModal = ({ isOpen, onClose }) => {
   const [progress, setProgress] = useState(0);
   const [installProgress, setInstallProgress] = useState(0);
   const [isInstalling, setIsInstalling] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) {
@@ -34,12 +36,12 @@ const DownloadModal = ({ isOpen, onClose, onComplete }) => {
           if (prev >= 100) {
             clearInterval(installInterval);
 
-            // Auto-close after completion
+            // Auto-close after completion and redirect to /printermodel
             setTimeout(() => {
-              onClose(); // close download modal
+              onClose();
               setTimeout(() => {
-                onComplete(); // open success modal after 3 sec
-              }, 3000);
+                router.push("/printermodel");
+              }, 2000);
             }, 500);
 
             return 100;
@@ -50,7 +52,7 @@ const DownloadModal = ({ isOpen, onClose, onComplete }) => {
 
       return () => clearInterval(installInterval);
     }
-  }, [isInstalling, onClose, onComplete]);
+  }, [isInstalling, onClose, router]);
 
   if (!isOpen) return null;
 
