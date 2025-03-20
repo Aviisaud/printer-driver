@@ -1,13 +1,14 @@
-"use client"
+"use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-const page = () => {
-    const router = useRouter();
+const PrinterModelPage = () => {
+  const router = useRouter();
 
-    const handleBrandClick = (brand) => {
-        router.push(`/printer/${brand}`);
-    };
+  const handleBrandClick = (brand) => {
+    router.push(`/printer/${brand}`);
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -31,13 +32,15 @@ const page = () => {
         ].map((printer) => (
           <div
             key={printer.name}
-            className="overflow-hidden rounded-lg shadow-lg"
+            className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
             onClick={() => handleBrandClick(printer.name)}
           >
-            <img
+            <Image
               src={printer.image}
               alt={printer.name}
-              className="w-full object-contain transition-transform duration-300 hover:scale-110 cursor-pointer"
+              width={300}
+              height={200}
+              className="w-full object-contain transition-transform duration-300 hover:scale-110"
             />
           </div>
         ))}
@@ -55,12 +58,12 @@ const page = () => {
           network or computer for best results.
         </p>
         <p className="text-gray-500 text-sm mt-2">
-          If not connected, don't worry — our driver updater will guide you step
-          by step.
+          If not connected, do not worry — our driver updater will guide you
+          step by step.
         </p>
       </div>
     </div>
   );
 };
 
-export default page;
+export default PrinterModelPage;

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { hpModels } from "@/data/hpModels";
+import Image from "next/image";
 
 const HpSearchPage = () => {
   const [query, setQuery] = useState("");
@@ -35,10 +36,10 @@ const HpSearchPage = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center md:text-left md:items-start gap-6">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-              We're here to help you set up your HP printer
+              We&apos;re here to help you set up your HP printer
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl">
-              Let's connect your printer to a Wi-Fi or wired network or to a
+              Let&apos;s connect your printer to a Wi-Fi or wired network or to a
               computer using a USB cable, but first, we need to know your
               printer model.
             </p>
@@ -120,18 +121,24 @@ const HpSearchPage = () => {
             </div>
 
             {/* Carousel Section */}
-            <div className="w-full lg:w-5/12 relative overflow-hidden">
+            <div className="w-full lg:w-5/12 relative overflow-hidden h-[250px] md:h-[300px]">
               {images.map((img, index) => (
-                <img
+                <div
                   key={index}
-                  src={img}
-                  alt={`Slide ${index}`}
-                  className={`w-full h-auto transition-opacity duration-700 ${
+                  className={`w-full h-full relative transition-opacity duration-700 ${
                     index === currentSlide
                       ? "opacity-100"
                       : "opacity-0 absolute inset-0"
                   }`}
-                />
+                >
+                  <Image
+                    src={img}
+                    alt={`Slide ${index}`}
+                    layout="fill"
+                    objectFit="contain"
+                    priority={index === currentSlide}
+                  />
+                </div>
               ))}
 
               {/* Carousel dots */}
