@@ -1,7 +1,17 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+import DownloadModal from "@/components/DownloadModal";
+import BrandModal from "@/components/BrandModal";
 
 const HeroSection = () => {
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
+  const handleDownloadComplete = () => {
+    setIsSuccessModalOpen(true);
+  };
+
   return (
     <section className="bg-gradient-to-r from-slate-800 to-slate-700 text-white py-16">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -15,12 +25,12 @@ const HeroSection = () => {
             every major brand. <br />
             Compatible with Windows 11, 10, 8, and 7.
           </p>
-          <a
-            href="#download"
+          <button
+            onClick={() => setIsDownloadModalOpen(true)}
             className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded shadow-lg transition"
           >
             Download Now
-          </a>
+          </button>
 
           {/* Trust badges */}
           <div className="mt-8">
@@ -57,6 +67,18 @@ const HeroSection = () => {
           />
         </div>
       </div>
+
+      {/* Download modal */}
+      <DownloadModal
+        isOpen={isDownloadModalOpen}
+        onClose={() => setIsDownloadModalOpen(false)}
+        onComplete={handleDownloadComplete}
+      />
+
+      <BrandModal
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+      />
     </section>
   );
 };
