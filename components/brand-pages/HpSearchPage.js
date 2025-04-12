@@ -10,9 +10,9 @@ const HpSearchPage = () => {
   const router = useRouter();
 
   const images = [
-    "https://support.hp.com/wcc-assets/content/dam/hp-wcc/headless-assets/images/p-finder/NSLaser.png",
-    "https://support.hp.com/wcc-assets/content/dam/hp-wcc/headless-assets/images/p-finder/Envy.png",
-    "https://support.hp.com/wcc-assets/content/dam/hp-wcc/headless-assets/images/p-finder/Deskjet.png",
+    "/img/hp-images/NSLaser.avif",
+    "/img/hp-images/Envy.avif",
+    "/img/hp-images/Deskjet.avif",
   ];
 
   useEffect(() => {
@@ -39,8 +39,8 @@ const HpSearchPage = () => {
               We&apos;re here to help you set up your HP printer
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl">
-              Let&apos;s connect your printer to a Wi-Fi or wired network or to a
-              computer using a USB cable, but first, we need to know your
+              Let&apos;s connect your printer to a Wi-Fi or wired network or to
+              a computer using a USB cable, but first, we need to know your
               printer model.
             </p>
           </div>
@@ -121,38 +121,25 @@ const HpSearchPage = () => {
             </div>
 
             {/* Carousel Section */}
-            <div className="w-full lg:w-5/12 relative overflow-hidden h-[250px] md:h-[300px]">
+            <div className="w-full lg:w-5/12 h-[250px] md:h-[300px] relative">
               {images.map((img, index) => (
                 <div
                   key={index}
-                  className={`w-full h-full relative transition-opacity duration-700 ${
+                  className={`absolute inset-0 transition-opacity duration-700 ${
                     index === currentSlide
-                      ? "opacity-100"
-                      : "opacity-0 absolute inset-0"
+                      ? "opacity-100 z-10"
+                      : "opacity-0 z-0"
                   }`}
                 >
                   <Image
                     src={img}
                     alt={`Slide ${index}`}
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    className="object-contain"
                     priority={index === currentSlide}
                   />
                 </div>
               ))}
-
-              {/* Carousel dots */}
-              <div className="flex justify-center mt-4 gap-2">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`h-2 w-2 rounded-full ${
-                      index === currentSlide ? "bg-blue-600" : "bg-gray-400"
-                    }`}
-                  ></button>
-                ))}
-              </div>
             </div>
           </div>
         </div>
