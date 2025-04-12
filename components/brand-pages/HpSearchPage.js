@@ -6,6 +6,7 @@ import Image from "next/image";
 
 const HpSearchPage = () => {
   const [query, setQuery] = useState("");
+  const [isModelSelected, setIsModelSelected] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const router = useRouter();
 
@@ -24,9 +25,10 @@ const HpSearchPage = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (query.trim() !== "") {
+    if (isModelSelected && query.trim() !== "") {
       router.push(`/printer/hp/${query.toLowerCase().replace(/\s+/g, "-")}`);
       setQuery("");
+      setIsModelSelected(false);
     }
   };
 
@@ -58,7 +60,7 @@ const HpSearchPage = () => {
                     <input
                       type="radio"
                       name="printerOption"
-                      className="form-radio text-blue-400 "
+                      className="form-radio text-blue-400"
                     />
                     <span className="text-gray-700 font-medium">
                       Unpack, Setup New Printer
@@ -82,9 +84,9 @@ const HpSearchPage = () => {
                 </p>
 
                 <div className="relative">
-                  {/* Autocomplete Suggestions Above Input */}
-                  {query.length > 0 && (
-                    <div className="absolute w-full bottom-full mb-2 bg-white rounded shadow max-h-55 overflow-y-auto z-20">
+                  {/* Autocomplete Suggestions */}
+                  {query.length > 0 && !isModelSelected && (
+                    <div className="absolute w-full bottom-full mb-2 bg-white rounded shadow max-h-60 overflow-y-auto z-20">
                       {hpModels
                         .filter((model) =>
                           model.toLowerCase().includes(query.toLowerCase())
@@ -92,7 +94,10 @@ const HpSearchPage = () => {
                         .map((model, index) => (
                           <p
                             key={index}
-                            onClick={() => setQuery(model)}
+                            onClick={() => {
+                              setQuery(model);
+                              setIsModelSelected(true);
+                            }}
                             className="cursor-pointer hover:bg-gray-100 px-4 py-2"
                           >
                             {model}
@@ -105,7 +110,10 @@ const HpSearchPage = () => {
                     type="text"
                     name="query"
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setIsModelSelected(false);
+                    }}
                     placeholder="Example: HP DeskJet 2632 All-in-One printer"
                     className="w-full border border-gray-300 rounded px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none mb-1"
                   />
@@ -113,7 +121,12 @@ const HpSearchPage = () => {
 
                 <button
                   type="submit"
-                  className="w-1/2 bg-blue-400 hover:bg-blue-600 text-white py-3 rounded text-lg transition-all mt-4 cursor-pointer"
+                  disabled={!isModelSelected}
+                  className={`w-1/2 ${
+                    isModelSelected
+                      ? "bg-blue-400 hover:bg-blue-600"
+                      : "bg-gray-300 cursor-not-allowed"
+                  } text-white py-3 rounded text-lg transition-all mt-4`}
                 >
                   Submit
                 </button>
