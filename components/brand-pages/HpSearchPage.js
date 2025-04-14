@@ -124,7 +124,7 @@ const HpSearchPage = () => {
                   disabled={!isModelSelected}
                   className={`w-1/2 ${
                     isModelSelected
-                      ? "bg-blue-400 hover:bg-blue-600"
+                      ? "bg-blue-400 hover:bg-blue-600 cursor-pointer"
                       : "bg-gray-300 cursor-not-allowed"
                   } text-white py-3 rounded text-lg transition-all mt-4`}
                 >

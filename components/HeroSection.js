@@ -6,7 +6,6 @@ import DownloadModal from "@/components/DownloadModal";
 const HeroSection = () => {
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
-
   const handleDownloadComplete = () => {
     setIsSuccessModalOpen(true);
   };
@@ -15,27 +14,28 @@ const HeroSection = () => {
     <section className="bg-gradient-to-r from-slate-800 to-slate-700 text-white py-16">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Install & Update Printer Drivers with
-            All-in-One Printer Driver Updater
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4 leading-tight font-sans">
+            Install & Update Printer Drivers with All-in-One Printer Driver
+            Updater
           </h1>
-          <p className="mt-4 mb-8">
+
+          <p className="mt-4 mb-8 font-sans">
             Download, install, and automatically update printer drivers for
-            every major brand. <br />
+            every major brand.
             Compatible with Windows 11, 10, 8, and 7.
           </p>
+
           <button
             onClick={() => setIsDownloadModalOpen(true)}
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded shadow-lg transition"
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded shadow-lg transition cursor-pointer"
           >
             Download Now
           </button>
 
           {/* Trust badges */}
           <div className="mt-8">
-            <div className="flex flex-nowrap overflow-x-auto gap-4 md:flex-wrap md:overflow-visible">
+            <div className="flex flex-nowrap justify-center md:justify-start overflow-x-auto gap-4 md:flex-wrap md:overflow-visible">
               {[
-                { src: "/img/AppEsteem_Seal_Logo.png", alt: "AppEsteem Seal" },
                 { src: "/img/seal-digicert.png", alt: "DigiCert Seal" },
                 { src: "/img/trustpilot.jpg", alt: "TrustPilot" },
               ].map((badge, index) => (
